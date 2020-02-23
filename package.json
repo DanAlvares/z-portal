@@ -1,0 +1,20 @@
+{
+  "name": "zoopla-portal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoopla/Dan.alvares.git"
+  },
+  "keywords": [],
+  "author": "Dan Alvares",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zoopla/Dan.alvares/issues"
+  },
+  "homepage": "https://github.com/zoopla/Dan.alvares#readme"
+}
