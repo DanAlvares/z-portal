@@ -1,0 +1,75 @@
+zoopla-listing-form {
+  position: relative;
+  z-index: 99;
+}
+
+.overlay {
+    background-color: rgba(0,0,0,.6);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.form-modal {
+    background-color: #fff;
+    border-radius: 1px;
+    box-sizing: border-box;
+    left: 50%;
+    max-height: 85vh;
+    max-width: 95%;
+    overflow: auto;
+    padding: 1.4rem;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+
+    header h3 {
+        border-bottom: solid 1px var(--light-grey);
+        margin: 0 0 1.4rem;    
+        padding-bottom: .75rem;
+    }
+}
+
+.form-field {
+    margin-bottom: 1rem
+}
+.form-field label {
+    display: block;
+    margin-bottom: .25rem;
+    width: 100%;
+}
+.form-field input,
+.form-field textarea {
+    border: solid 1px var(--light-grey);
+    border-radius: 1px;
+    margin-bottom: .25rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    padding: .6rem;
+    width: 100%;
+}
+.form-field.address {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    label {
+        flex: 0 0 100%
+    }
+    input{
+    width: 70%;
+    &+ input {
+        width: 28%;
+    }
+  }
+}
+.btn-group {
+  text-align: right;
+}
+
+.form-field.error {
+  background-color: var(--error-tint);
+  border-color: var(--error);
+}

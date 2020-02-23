@@ -14,9 +14,10 @@ const HTMLTemplate = (params: IAppState) => `
 `;
 
 export class AppComponent extends HTMLElement {
-  public state: IAppState = { listings }
-  public addListingBtn!: HTMLElement;
-  public zooplaForm!: HTMLElement;
+  public state: IAppState = { listings };
+
+  private addListingBtn!: HTMLElement;
+  private zooplaForm!: HTMLElement;
 
   constructor() {
     super();

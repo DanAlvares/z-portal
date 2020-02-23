@@ -1,8 +1,8 @@
 import './Listings.scss';
-import { listings, IListing } from '../App/data';
+import { IListing } from '../App/data';
 
 const HTMLTemplate = (state: IListingsState) => `
-    <h2>${state.title} (${state.listings.length})</h2>
+    <h2>${state.title}</h2>
 
     <section class="listings">
     </section>
