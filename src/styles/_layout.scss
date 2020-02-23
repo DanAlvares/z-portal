@@ -1,0 +1,16 @@
+.container {
+  margin: auto;
+  max-width: 98%;
+  width: 1160px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 300px;
+  grid-gap: var(--layout-gap);
+  max-width: var(--maxWidth);
+
+  & > aside {
+    padding: 1rem;
+  }
+}

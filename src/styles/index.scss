@@ -1,0 +1,8 @@
+@import './global';
+@import './typography';
+@import './layout';
+
+
+// I would usually import these in the component, but
+// Jest is not playing nicely and I don't want to spend time on tooling
+@import '../components/Header/Header.scss';
