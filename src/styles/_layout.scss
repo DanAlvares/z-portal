@@ -1,6 +1,8 @@
 .container {
+  box-sizing: border-box;
   margin: auto;
-  max-width: 98%;
+  max-width: 100%;
+  padding: 0 var(--layout-gap);
   width: 1160px;
 }
 
@@ -12,5 +14,14 @@ main {
 
   & > aside {
     padding: 1rem;
+  }
+
+  @media (max-width: 1024px){
+    display: block;
+
+    aside {
+      height: 0;
+      width: 0;
+    }
   }
 }

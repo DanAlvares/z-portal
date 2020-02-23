@@ -1,0 +1,77 @@
+zoopla-listings {
+  h2 {
+    margin-top: 0;
+  }
+
+  .single-listing{
+    position: relative;
+    margin-bottom: 2rem;
+    padding: 0 0 2rem;
+    border-bottom: solid 1px #dedede;
+
+    h3 {
+      margin: 0
+    }
+
+    .beds {
+      font-weight: bold;
+    }
+
+    address {
+      color: #7c7c7c;
+      font-style: italic;
+    }
+
+    .expired {
+      background-color: var(--error);
+      color: #ffffff;
+      left: 0;
+      overflow: hidden;
+      padding: 3px;
+      position: absolute;
+      top: 0;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .description {
+      margin: .65rem 0;
+    }
+
+    .thumbnail-gallery {
+      float: left;
+      margin-right: 1rem;
+      overflow: auto;
+      position: relative;
+      width: 150px;
+      white-space: nowrap;
+
+      img{
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    button {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    @media (max-width: 413px){
+      padding-bottom: 4rem;
+      
+      .thumbnail-gallery {
+        float: none;
+        width: 100%;
+      }
+      
+      button {
+        bottom: .5rem;
+        right: 0;
+        top: auto;
+        width: 100%;
+      }
+    }
+  }
+}

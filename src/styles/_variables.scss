@@ -1,0 +1,18 @@
+:root {
+  --primary-color: #6a148e;
+  --secondary-color: #ff5722;
+  --secondary-color-dark: #f34007;
+  --error: #d02929;
+  --black: #333333;
+  --white: #eeeeee;
+  --light-grey: #cccccc;
+
+  --layout-gap: 2rem;
+
+  --heading-font: 'Helvetica Neue', Helvetica, sans-serif;
+  --body-font: Helvetica, Arial;
+  
+  @media (max-width: 1024px){
+    --layout-gap: 1rem; 
+  }
+}
