@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/zoopla/Dan.alvares/issues"
   },
-  "homepage": "https://github.com/zoopla/Dan.alvares#readme"
+  "homepage": "https://github.com/zoopla/Dan.alvares#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.25.0",
+    "tslint": "^6.0.0",
+    "typescript": "^3.8.2"
+  }
 }
