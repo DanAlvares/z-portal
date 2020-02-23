@@ -2,27 +2,28 @@
   "name": "zoopla-portal",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --env=jest-environment-happy-dom"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zoopla/Dan.alvares.git"
-  },
-  "keywords": [],
   "author": "Dan Alvares",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/zoopla/Dan.alvares/issues"
-  },
-  "homepage": "https://github.com/zoopla/Dan.alvares#readme",
+  "dependencies": {},
   "devDependencies": {
+    "@types/jest": "^25.1.3",
+    "babel-core": "^6.26.3",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0",
+    "jest-environment-happy-dom": "0.0.41",
     "parcel-bundler": "^1.12.4",
     "sass": "^1.25.0",
+    "ts-jest": "^25.2.1",
     "tslint": "^6.0.0",
     "typescript": "^3.8.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
   }
 }
