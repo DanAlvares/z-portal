@@ -40,7 +40,7 @@ Well structured, semantic markup will get the app 80% of the way. I don't feel t
 
 ## TODO
 - [ ] Complete styling from `SingleListingComponent`
-- [ ] Validate form on submit
+- [ ] Wire-up the form (incl validation and unit tests)
 - [ ] Listings unit tests
 - [ ] Complete IndexedDB wrapper
 - [ ] `ThumbnailGallerycomponent` (incl unit tests)
