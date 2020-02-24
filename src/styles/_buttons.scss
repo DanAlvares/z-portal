@@ -24,12 +24,12 @@
 }
 .btn-outline {
   background-color: white;
-  border: solid 1px var(--secondary-color);
-  color: var(--secondary-color);
+  border: solid 1px var(--secondary-color-dark);
+  color: var(--secondary-color-dark);
   
   &:hover {
     color: var(--white);
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color-dark);
   }
 }
 @media (max-width: 1024px){
