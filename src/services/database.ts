@@ -2,6 +2,7 @@ if (!window.indexedDB) {
   console.warn("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.");
 }
 
+// Promise-based wrapper for IndexedDB
 export class AppIndexedDb {
   public db: any;
   public request: any;
