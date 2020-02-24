@@ -41,7 +41,7 @@ zoopla-listings {
     .thumbnail-gallery {
       float: left;
       margin-right: 1rem;
-      overflow: auto;
+      overflow: hidden;
       position: relative;
       width: 150px;
       white-space: nowrap;
