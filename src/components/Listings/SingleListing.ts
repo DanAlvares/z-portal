@@ -1,4 +1,4 @@
-import { IListing } from "../App/data";
+import { IListing } from "./ListingsModel";
 
 const HTMLTemplate = (listing: IListing) => `
     <div class="expired" ${listing.expired ? '' : 'hidden'}>Expired</div>
@@ -9,12 +9,12 @@ const HTMLTemplate = (listing: IListing) => `
         <img src="https://via.placeholder.com/150" alt="" width="150" height="150">
     </section>
 
-    <h3>${listing.asking_price}</h3>
+    <h3>${listing.askingPrice}</h3>
 
     <strong class="beds">${listing.beds} Bed</strong> |
     <strong class="baths">${listing.baths} Bath</strong>
 
-    <address>${listing.address.line_1}, ${listing.address.postcode}</address>
+    <address>${listing.address}, ${listing.postcode}</address>
 
     <p class="description">${listing.description}</p>
 

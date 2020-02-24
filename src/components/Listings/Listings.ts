@@ -1,5 +1,5 @@
 import './Listings.scss';
-import { IListing } from '../App/data';
+import { IListing } from './ListingsModel';
 
 const HTMLTemplate = (state: IListingsState) => `
     <h2>${state.title}</h2>
@@ -35,6 +35,7 @@ class ListingsComponent extends HTMLElement {
   renderListings() {
     const listingFragment = document.createDocumentFragment();
     const listingsElement = <HTMLElement>document.querySelector('.listings');
+    listingsElement.innerHTML = '';
 
     this.state.listings.forEach(item => {
       const listingItem = document.createElement('article', { is: 'zoopla-listing' });

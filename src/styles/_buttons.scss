@@ -34,6 +34,8 @@
 }
 @media (max-width: 1024px){
   aside button.btn{
+    background: none;
+    box-shadow: none;
     padding-right: 2rem;
     padding-left: 2rem;
     position: fixed;
@@ -45,6 +47,10 @@
     font-size: 2.4rem;
     padding: .6rem 1rem 1rem;
     line-height: 1rem;
+    
+    &:hover {
+      background: none;
+    }
 
     span {
       display: none;

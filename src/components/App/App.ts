@@ -1,4 +1,6 @@
-import { listings, IListing } from "./data";
+import { IListing } from "../Listings/ListingsModel";
+import { ListingService } from '../../services/ListingService';
+import { Utils } from '../../services/Utils';
 
 const HTMLTemplate = (params: IAppState) => `
     <main class="container">
@@ -14,7 +16,8 @@ const HTMLTemplate = (params: IAppState) => `
 `;
 
 export class AppComponent extends HTMLElement {
-  public state: IAppState = { listings };
+  public listingService = new ListingService();
+  public state: IAppState = { listings: this.listingService.getListings() };
 
   private addListingBtn!: HTMLElement;
   private zooplaForm!: HTMLElement;
@@ -40,13 +43,10 @@ export class AppComponent extends HTMLElement {
   }
 
   render() {
-    this.state.sanitized_listings = this._sanitizeHtml(JSON.stringify(this.state.listings))
+    this.state.sanitized_listings = Utils.sanitizeHtml(JSON.stringify(this.state.listings))
     this.innerHTML = HTMLTemplate(this.state);
   }
 
-  _sanitizeHtml(html: string): string {
-    return html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-  }
 }
 
 window.customElements.define('zoopla-portal', AppComponent);

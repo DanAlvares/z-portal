@@ -1,3 +1,6 @@
+
+import { ListingService } from "../../services/ListingService";
+
 const HTMLTemplate = (params: any) => `
     <div class="overlay"></div>
 
@@ -42,6 +45,7 @@ const HTMLTemplate = (params: any) => `
 
 class ListingForm extends HTMLElement {
   public state = {};
+  public listingService = new ListingService();
 
   private cancelBtn!: HTMLElement;
   private photoUpload!: HTMLElement;
@@ -62,32 +66,33 @@ class ListingForm extends HTMLElement {
     this.listingForm = <HTMLFormElement>document.querySelector('.listing-form');
     this.zooplaForm = <HTMLElement>document.querySelector('zoopla-listing-form');
 
-    this.cancelBtn.addEventListener('click', this.cancelEdit.bind(this));
+    this.cancelBtn.addEventListener('click', this.closeModal.bind(this));
     this.saveBtn.addEventListener('click', this.triggerSubmitted.bind(this));
     this.listingForm.addEventListener('submit', this.saveListing.bind(this));
     this.photoUpload.addEventListener('change', (event) => this.uploadPhotos(event));
   }
 
   disconnectedCallback() {
-    this.cancelBtn.removeEventListener('click', this.cancelEdit.bind(this));
+    this.cancelBtn.removeEventListener('click', this.closeModal.bind(this));
     this.saveBtn.removeEventListener('click', this.triggerSubmitted.bind(this));
     this.listingForm.removeEventListener('submit', this.saveListing.bind(this));
     this.photoUpload.removeEventListener('change', (event) => this.uploadPhotos(event));
   }
 
   saveListing(event: Event) {
-    const elements = ['AskingPrice', 'Beds', 'Baths', 'Address', 'Postcode', 'Description'];
-    const formData: any = {
-      Photos: this.photos
+    const elements = ['Address', 'AskingPrice', 'Baths', 'Beds', 'Postcode', 'Description'];
+    const newListing: any = {
+      photos: this.photos
     };
 
     elements.forEach((elem: string) => {
-      formData[elem] = (event.target as any).elements[elem].value;
+      const listingProp = elem.charAt(0).toLowerCase() + elem.slice(1);
+      newListing[listingProp] = (event.target as any).elements[elem].value;
     })
 
-    console.log('Form Data:', formData)
-
+    this.listingService.addListing(newListing);
     this.listingForm.classList.remove('submitted')
+    this.closeModal();
     event.preventDefault()
   }
 
@@ -112,7 +117,7 @@ class ListingForm extends HTMLElement {
     }
   }
 
-  cancelEdit() {
+  closeModal() {
     this.zooplaForm.toggleAttribute('hidden');
   }
 
