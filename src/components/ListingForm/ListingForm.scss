@@ -51,7 +51,7 @@ zoopla-listing-form {
     padding: .6rem;
     width: 100%;
 }
-.form-field.address {
+.form-field.two-column {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -59,17 +59,36 @@ zoopla-listing-form {
         flex: 0 0 100%
     }
     input{
+    width: 49%;
+  }
+}
+.form-field.two-column.address {
+    input{
     width: 70%;
     &+ input {
         width: 28%;
     }
   }
 }
+.form-field.error input,
+form.submitted textarea:invalid, 
+form.submitted input:invalid {
+  background-color: var(--error-tint);
+  border-color: var(--error);
+}
+
 .btn-group {
   text-align: right;
 }
 
-.form-field.error {
-  background-color: var(--error-tint);
-  border-color: var(--error);
+.uploaded-photos img {
+  max-height: 80px;
+  max-width: 80px;
+  margin-right: .4rem;
+}
+
+@media (max-width: 413px) {
+    .form-field.two-column input {
+      width: 100%
+    }
 }
