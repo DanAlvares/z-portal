@@ -14,7 +14,7 @@ I have used Jest for unit tests. There aren't many tests yet.
 I have set up a git pre-push hook that runs them.
 
 ## Approach
-I went for the pure JavaScript approach (well, with TypeScript), with no framework or libraries. This did mean I had to handle rendering, sanitization (to prevent XSS) etc. which comes for free with frameworks, so that did take some time.  
+I went for the pure JavaScript approach (well, with TypeScript), with no framework or libraries. This did mean I had to handle rendering, sanitization (to prevent XSS) etc. which comes for free with frameworks, so that was a little time-consuming.  
 _(I did step out of my comfort zone a little writing the entire app using Custom Elements, as I have only used them as part of Web Components)_
 
 ### Why Custom Elements?
