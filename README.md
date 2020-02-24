@@ -33,8 +33,8 @@ I haven't used any git flow, but, as well as automating the unit tests, I have s
 ### Storage
 I decided to use IndexedDB. In this way, data will be stored locally by default, making offline support trivial. However, the native API is quite awkward so I started writing a promise-based API wrapper for IndexedDB (`src/services/database.ts`).
 
-## Accessibility
-I don't feel too much _more_ needs to be done a highly accessible application. Well structured semantic markup will get the app 80% of the way. The lighthouse score of this app is 100% for all **Performance**, **Best Practices**, **Accessibility** and **SEO**
+### Accessibility
+I don't feel too much _more_ needs to be done to achieve a highly accessible application. Well structured semantic markup will get the app 80% of the way. The lighthouse score of this app is 100% for all **Performance**, **Best Practices**, **Accessibility** and **SEO**
 
 
 ## TODO
