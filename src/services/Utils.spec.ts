@@ -11,7 +11,7 @@ describe('UtilsService', () => {
       const sanitized = Utils.sanitizeHtml(html);
 
       // Assert
-      expect(sanitized).toBe('&lt;script&gt;');
+      expect(sanitized).toBe('&lt;script>');
     });
   })
 
