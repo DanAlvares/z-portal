@@ -1,7 +1,5 @@
 
-const HTMLTemplate = (state: any) => `
-
-`;
+const HTMLTemplate = (state: any) => ``;
 
 export class ImageGalleryComponent extends HTMLElement {
   public state = {}
@@ -12,7 +10,7 @@ export class ImageGalleryComponent extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['listing'];
+    return [];
   }
 
   attributeChangedCallback(attr: string, oldValue: string, newValue: string) { }
@@ -20,6 +18,10 @@ export class ImageGalleryComponent extends HTMLElement {
   connectedCallback() { }
 
   disconnectedCallback() { }
+
+  previous() { }
+
+  next() { }
 
   render(state = this.state) {
     this.innerHTML = HTMLTemplate(state);

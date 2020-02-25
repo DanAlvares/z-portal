@@ -2,9 +2,7 @@ import { IListing } from './ListingsModel';
 
 const HTMLTemplate = (state: IListingsState) => `
     <h2>${state.title}</h2>
-
-    <section class="listings">
-    </section>
+    <section class="listings"></section>
 `;
 
 export class ListingsComponent extends HTMLElement {
@@ -23,12 +21,8 @@ export class ListingsComponent extends HTMLElement {
   attributeChangedCallback(attr: string, oldValue: string, newValue: string) {
     if (attr === 'listings') {
       this.state.listings = JSON.parse(newValue);
-      this.renderListings()
+      this.renderListings();
     }
-  }
-
-  connectedCallback() {
-    // this.renderListings()
   }
 
   renderListings() {

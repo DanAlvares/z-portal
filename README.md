@@ -1,5 +1,6 @@
 # Zoopla Portal
 
+A portal, used by agents, to add their listings.
 
 ## Running the app
     $ git clone <REPO_URL>  
@@ -13,8 +14,8 @@
 I have used Jest for unit tests. There aren't many tests yet, but I have set up a git pre-push hook that runs them. This is not sustainable as the test suite grows, but I believe is beneficial if the tests run in under 5 seconds.
 
 ## Approach
-I went for the pure JavaScript approach (well, with TypeScript), with no framework or libraries. This did mean I had to handle rendering, sanitization (to prevent XSS) etc. which comes for free with frameworks, so that was a little time-consuming.  
-_(I did step out of my comfort zone a little writing the entire app using Custom Elements, as I have only used them as part of Web Components)_
+I went for the pure JavaScript approach (well, using TypeScript), with no framework or libraries. This did mean I had to handle rendering, sanitization (to prevent XSS) etc. which comes for free with frameworks, so that was a little time-consuming.  
+_(I did step out of my comfort zone a little by writing the entire app using Custom Elements. I have only used them as part of Web Components)_
 
 ### Why Custom Elements?
 I wanted to build the app using a component-based architecture. Custom Elements seemed like the best choice as I could leverage the built-in lifecycle events. I did consider the full Web Components spec, but I did not use the Shadow DOM because I wanted the base styles to cascade. 
@@ -38,9 +39,10 @@ I initially decided to use IndexedDB. In this way, data will be stored locally b
 Well structured, semantic markup will get the app 80% of the way. I don't feel too much _more_ needs to be done to achieve a highly accessible application. The lighthouse score of this app is 100% for all **Performance**, **Best Practices**, **Accessibility** and **SEO**
 
 ## TODO
-- [ ] Complete styling from `SingleListingComponent`
+- [ ] Add option to expire listing
 - [ ] Complete `ImageGalleryComponent`(incl unit tests)
 - [ ] `PhotoUploadComponent` (to Cloudinary)
+- [ ] Improve styling from `SingleListingComponent`
 
 #### Would be nice
 - [ ] Add Service Worker for PWA
