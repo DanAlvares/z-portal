@@ -1,4 +1,5 @@
 export interface IListing {
+  _id: number;
   address: string;
   postcode: string;
   askingPrice: string;

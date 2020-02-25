@@ -39,7 +39,7 @@ class ListingsComponent extends HTMLElement {
 
     this.state.listings.forEach(item => {
       const listingItem = document.createElement('article', { is: 'zoopla-listing' });
-      listingItem.setAttribute('data', JSON.stringify(item))
+      listingItem.setAttribute('listing', JSON.stringify(item))
       listingItem.className = 'single-listing';
       listingFragment.appendChild(listingItem);
     });

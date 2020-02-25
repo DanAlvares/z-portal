@@ -33,16 +33,13 @@ I am a proponent of TypeScript and use it in almost every project. Interfaces an
 I haven't used any git flow, but, as well as automating the unit tests, I have set up Continuous Deployment with Netlify, so the app is released when the code is pushed or merged to master. https://z-portal.netlify.com/
 
 ### Storage
-I decided to use IndexedDB. In this way, data will be stored locally by default, making offline support trivial. However, the native API is quite awkward so I started writing a promise-based API wrapper for IndexedDB (`src/services/database.ts`).
+I initially decided to use IndexedDB. In this way, data will be stored locally by default, making offline support trivial. However, the native API is quite awkward so I started writing a promise-based API wrapper for IndexedDB (`src/services/database.ts`). However, all that was taking too much time and was overkill for this project so I just went with LocalStorage.
 
 ### Accessibility
 Well structured, semantic markup will get the app 80% of the way. I don't feel too much _more_ needs to be done to achieve a highly accessible application. The lighthouse score of this app is 100% for all **Performance**, **Best Practices**, **Accessibility** and **SEO**
 
 ## TODO
 - [ ] Complete styling from `SingleListingComponent`
-- [ ] Wire-up the form (incl validation and unit tests)
-- [ ] Listings unit tests
-- [ ] Complete IndexedDB wrapper
 - [ ] `ThumbnailGallerycomponent` (incl unit tests)
 - [ ] `ImageGalleryComponent`(incl unit tests)
 - [ ] `PhotoUploadComponent` (to Cloudinary)
@@ -50,6 +47,8 @@ Well structured, semantic markup will get the app 80% of the way. I don't feel t
 #### Would be nice
 - [ ] Add Service Worker for PWA
 - [ ] Add Cypress e2e & integration tests
+- [ ] Complete Promise-based API for Indexed DB
+
 
 
 ## Questions

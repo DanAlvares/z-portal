@@ -1,7 +1,8 @@
 
 import { ListingService } from "../../services/ListingService";
+import { IListing } from "../Listings/ListingsModel";
 
-const HTMLTemplate = (params: any) => `
+const HTMLTemplate = (listing: IListing) => `
     <div class="overlay"></div>
 
     <div class="form-modal">
@@ -10,21 +11,21 @@ const HTMLTemplate = (params: any) => `
         <form class="listing-form">
             <div class="form-field">
                 <label for="AskingPrice">Asking price</label>
-                <input type="text" placeholder="What is the asking price? eg. £400 000" name="AskingPrice" id="AskingPrice" required>
+                <input value="${listing.askingPrice}" type="text" placeholder="What is the asking price? eg. £400 000" name="AskingPrice" id="AskingPrice" required>
             </div>
             <div class="form-field two-column">
                 <label for="Beds">Number of bedrooms & bathrooms</label>
-                <input type="number" placeholder="How many bedrooms?" name="Beds" id="Beds" required>
-                <input type="number" placeholder="How many bathrooms?" name="Baths" id="Baths" required>
+                <input value="${listing.beds}" type="number" placeholder="How many bedrooms?" name="Beds" id="Beds" required>
+                <input value="${listing.baths}" type="number" placeholder="How many bathrooms?" name="Baths" id="Baths" required>
             </div>
             <div class="form-field two-column address">
                 <label for="Address">Address</label>
-                <input type="text" placeholder="What is the first line?" name="Address" id="Address" required>
-                <input type="text" placeholder="Postcode" name="Postcode" id="Postcode" required>
+                <input value="${listing.address}" type="text" placeholder="What is the first line?" name="Address" id="Address" required>
+                <input value="${listing.postcode}" type="text" placeholder="Postcode" name="Postcode" id="Postcode" required>
             </div>
             <div class="form-field">
                 <label for="Description">Description</label>
-                <textarea placeholder="Give some details about the property  " name="Description" id="Description" required></textarea>
+                <textarea placeholder="Give some details about the property" name="Description" id="Description" required>${listing.description}</textarea>
             </div>
             
             <div class="form-field">
@@ -43,37 +44,55 @@ const HTMLTemplate = (params: any) => `
     </div>
 `;
 
-class ListingForm extends HTMLElement {
-  public state = {};
-  public listingService = new ListingService();
+export class ListingForm extends HTMLElement {
+  public newListing: IListing | any = {
+    _id: new Date().getTime(),
+    address: '',
+    askingPrice: '',
+    baths: null,
+    beds: null,
+    description: '',
+    expired: false,
+    postcode: '',
+    photos: [],
+  }
 
+  private editing: boolean = false;
+  private listingService = new ListingService();
   private cancelBtn!: HTMLElement;
   private photoUpload!: HTMLElement;
   private saveBtn!: HTMLElement;
-  private zooplaForm!: HTMLElement;
   private listingForm!: HTMLFormElement;
-  private photos: string[] = [];
 
   constructor() {
     super();
     this.render();
   }
 
-  connectedCallback() {
-    this.cancelBtn = <HTMLElement>document.querySelector('.btn.cancel-edit');
-    this.saveBtn = <HTMLElement>document.querySelector('.btn.save-listing');
-    this.photoUpload = <HTMLElement>document.querySelector('#Photos');
-    this.listingForm = <HTMLFormElement>document.querySelector('.listing-form');
-    this.zooplaForm = <HTMLElement>document.querySelector('zoopla-listing-form');
+  static get observedAttributes() {
+    return ['listing'];
+  }
 
-    this.cancelBtn.addEventListener('click', this.closeModal.bind(this));
+  attributeChangedCallback(attr: string, oldValue: string, newValue: string) {
+    if (newValue && attr === 'listing') {
+      this.populateForm(JSON.parse(newValue))
+    }
+  }
+
+  connectedCallback() {
+    this.cancelBtn = <HTMLElement>this.querySelector('.btn.cancel-edit');
+    this.saveBtn = <HTMLElement>this.querySelector('.btn.save-listing');
+    this.photoUpload = <HTMLElement>this.querySelector('#Photos');
+    this.listingForm = <HTMLFormElement>this.querySelector('.listing-form');
+
+    this.cancelBtn.addEventListener('click', this.hideForm.bind(this));
     this.saveBtn.addEventListener('click', this.triggerSubmitted.bind(this));
     this.listingForm.addEventListener('submit', this.saveListing.bind(this));
     this.photoUpload.addEventListener('change', (event) => this.uploadPhotos(event));
   }
 
   disconnectedCallback() {
-    this.cancelBtn.removeEventListener('click', this.closeModal.bind(this));
+    this.cancelBtn.removeEventListener('click', this.hideForm.bind(this));
     this.saveBtn.removeEventListener('click', this.triggerSubmitted.bind(this));
     this.listingForm.removeEventListener('submit', this.saveListing.bind(this));
     this.photoUpload.removeEventListener('change', (event) => this.uploadPhotos(event));
@@ -81,19 +100,21 @@ class ListingForm extends HTMLElement {
 
   saveListing(event: Event) {
     const elements = ['Address', 'AskingPrice', 'Baths', 'Beds', 'Postcode', 'Description'];
-    const newListing: any = {
-      photos: this.photos
-    };
 
     elements.forEach((elem: string) => {
       const listingProp = elem.charAt(0).toLowerCase() + elem.slice(1);
-      newListing[listingProp] = (event.target as any).elements[elem].value;
+      this.newListing[listingProp] = (event.target as any).elements[elem].value;
     })
 
-    this.listingService.addListing(newListing);
-    this.listingForm.classList.remove('submitted')
-    this.closeModal();
-    event.preventDefault()
+    if (!this.editing) {
+      this.listingService.addListing(this.newListing);
+    } else {
+      this.listingService.updateListing(this.newListing);
+      this.editing = false;
+    }
+    this.listingForm.classList.remove('submitted');
+    this.hideForm();
+    event.preventDefault();
   }
 
   uploadPhotos({ target: input }: any) {
@@ -109,7 +130,8 @@ class ListingForm extends HTMLElement {
 
           newImage.setAttribute('src', imageDataUrl);
           gallerySection.appendChild(newImage);
-          this.photos.push(imageDataUrl)
+
+          this.newListing.photos.push(imageDataUrl)
         };
 
         reader.readAsDataURL(input.files[i]);
@@ -117,18 +139,28 @@ class ListingForm extends HTMLElement {
     }
   }
 
-  closeModal() {
-    this.zooplaForm.toggleAttribute('hidden');
+  hideForm() {
+    this.setAttribute('hidden', 'hidden');
+    this.disconnectedCallback();
+    this.render(this.newListing);
+    this.connectedCallback();
   }
 
   triggerSubmitted() {
     this.listingForm.classList.add('submitted')
   }
 
-  render() {
-    this.innerHTML = HTMLTemplate(this.state);
+  populateForm(listing: IListing) {
+    this.editing = true;
+    // TODO: Populate listing.photos array
+    this.disconnectedCallback();
+    this.render(listing);
+    this.connectedCallback();
   }
 
+  render(listing = this.newListing) {
+    this.innerHTML = HTMLTemplate(listing);
+  }
 }
 
 window.customElements.define('zoopla-listing-form', ListingForm);

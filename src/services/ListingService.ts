@@ -1,25 +1,43 @@
 import { listings } from './data';
 import { AppComponent } from '../components/App/App';
 import { IListing } from '../components/Listings/ListingsModel';
-import { Utils } from './Utils';
 
 export class ListingService {
 
   constructor() { }
 
-  addListing(listing: IListing) {
+  addListing(listing: IListing): void {
     const appComponent = new AppComponent();
     appComponent.state.listings.unshift(listing);
     appComponent.render();
-    localStorage.setItem('listings', JSON.stringify(appComponent.state.listings));
+    this.saveListings(appComponent.state.listings);
   }
 
-  getListings() {
+  getListings(): IListing[] {
     const listingsStore = localStorage.getItem('listings');
 
     if (listingsStore) {
       return JSON.parse(listingsStore);
     }
     return listings;
+  }
+
+  updateListing(listing: IListing): void {
+    const appComponent = new AppComponent();
+    const appListings = appComponent.state.listings;
+
+    const listingIndex = appListings.findIndex((listing: IListing) => listing._id === listing._id);
+    // TODO: Expire listing (as part of the form)
+    appComponent.state.listings = [
+      ...appListings.slice(0, listingIndex),
+      listing,
+      ...appListings.slice(listingIndex + 1, appListings.length)
+    ]
+    appComponent.render();
+    this.saveListings(appComponent.state.listings);
+  }
+
+  private saveListings(listings: IListing[]) {
+    localStorage.setItem('listings', JSON.stringify(listings));
   }
 }

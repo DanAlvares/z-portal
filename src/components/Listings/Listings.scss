@@ -35,7 +35,8 @@ zoopla-listings {
     }
 
     .description {
-      margin: .65rem 0;
+      margin: .65rem 0 0;
+      min-height: 64px;
     }
 
     .thumbnail-gallery {
@@ -47,8 +48,9 @@ zoopla-listings {
       white-space: nowrap;
 
       img{
-        width: 100%;
         height: auto;
+        max-width: 100%;
+        width: 100%;
       }
     }
 
