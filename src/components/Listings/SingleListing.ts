@@ -3,7 +3,7 @@ import { ListingService } from '../../services/ListingService';
 import placeholderImage from '../../images/placeholder.png'
 
 const HTMLTemplate = (listing: IListing) => `
-    <div class="expired" ${listing.expired ? '' : 'hidden'}>Expired</div>
+    ${listing.expired ? '<div class="expired">Expired</div>' : ''}
 
     <picture>
       <!-- Add Image Sources here-->

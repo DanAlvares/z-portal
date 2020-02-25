@@ -34,6 +34,11 @@ const HTMLTemplate = (listing: IListing) => `
                 <section class="uploaded-photos"></section>
             </div>
 
+            <div class="form-field checkbox">
+              <input ${listing.expired ? 'checked' : ''} type="checkbox"  name="Expired" id="Expired">
+              <label for="Expired">Expired?</label>
+            </div>
+
             <section class="btn-group">
                 <button class="btn cancel-edit" type="button">Cancel</button>
                 <button class="btn btn-secondary save-listing" type="submit">Save Listing</button>
@@ -104,12 +109,15 @@ export class ListingForm extends HTMLElement {
   }
 
   saveListing(event: Event) {
-    const elements = ['Address', 'AskingPrice', 'Baths', 'Beds', 'Postcode', 'Description'];
+    const elements = ['Address', 'AskingPrice', 'Baths', 'Beds', 'Description', 'Postcode'];
 
     elements.forEach((elem: string) => {
       const listingProp = elem.charAt(0).toLowerCase() + elem.slice(1);
       this.newListing[listingProp] = (event.target as any).elements[elem].value;
+      if (listingProp === 'expired') {
+      }
     })
+    this.newListing.expired = (event.target as any).elements['Expired'].checked;
 
     if (!this.editing) {
       this.listingService.addListing(this.newListing);

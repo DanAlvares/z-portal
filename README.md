@@ -39,10 +39,10 @@ I initially decided to use IndexedDB. In this way, data will be stored locally b
 Well structured, semantic markup will get the app 80% of the way. I don't feel too much _more_ needs to be done to achieve a highly accessible application. The lighthouse score of this app is 100% for all **Performance**, **Best Practices**, **Accessibility** and **SEO**
 
 ## TODO
-- [ ] Add option to expire listing
 - [ ] Complete `ImageGalleryComponent`(incl unit tests)
 - [ ] `PhotoUploadComponent` (to Cloudinary)
 - [ ] Improve styling from `SingleListingComponent`
+- [ ] Improve unit test coverage
 
 #### Would be nice
 - [ ] Add Service Worker for PWA

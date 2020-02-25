@@ -77,6 +77,37 @@ form.submitted input:invalid {
   border-color: var(--error);
 }
 
+.checkbox {
+  position: relative;
+
+  input[type=checkbox] {
+    opacity: 0;
+    pointer-events: none;
+        position: absolute;
+
+    &+label {
+      padding-left: 2rem;
+
+      &::before{
+        border: solid 1px var(--light-grey);
+        content: '';
+        display: block;
+        height: 1.4rem;
+        left: 0;
+        position: absolute;
+        top: -.15rem;
+        width: 1.4rem;
+      }
+    }
+    &:checked + label:before{
+      content:'✓';
+      font-size: 1.6rem;
+      line-height: 1.5rem;
+      text-align: center;
+    }
+  }
+}
+
 .btn-group {
   text-align: right;
 }
