@@ -7,10 +7,5 @@ export interface IListing {
   beds: number;
   description: string;
   expired: boolean;
-  photos: IPhoto[];
-}
-
-interface IPhoto {
-  caption: string;
-  url: string;
+  photos: string[];
 }

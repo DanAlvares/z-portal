@@ -63,6 +63,7 @@ export class ListingForm extends HTMLElement {
   private photoUpload!: HTMLElement;
   private saveBtn!: HTMLElement;
   private listingForm!: HTMLFormElement;
+  private gallerySection!: HTMLElement;
 
   constructor() {
     super();
@@ -84,6 +85,7 @@ export class ListingForm extends HTMLElement {
     this.saveBtn = <HTMLElement>this.querySelector('.btn.save-listing');
     this.photoUpload = <HTMLElement>this.querySelector('#Photos');
     this.listingForm = <HTMLFormElement>this.querySelector('.listing-form');
+    this.gallerySection = <HTMLElement>this.querySelector('.uploaded-photos');
 
     this.cancelBtn.addEventListener('click', this.hideForm.bind(this));
     this.saveBtn.addEventListener('click', this.triggerSubmitted.bind(this));
@@ -118,8 +120,6 @@ export class ListingForm extends HTMLElement {
   }
 
   uploadPhotos({ target: input }: any) {
-    const gallerySection = <HTMLElement>document.querySelector('.uploaded-photos');
-
     if (input?.files) {
       for (let i = 0; i < input.files.length; i++) {
         const reader = new FileReader();
@@ -129,9 +129,9 @@ export class ListingForm extends HTMLElement {
           const imageDataUrl = (event.target as any).result;
 
           newImage.setAttribute('src', imageDataUrl);
-          gallerySection.appendChild(newImage);
 
           this.newListing.photos.push(imageDataUrl)
+          this.gallerySection.appendChild(newImage);
         };
 
         reader.readAsDataURL(input.files[i]);
@@ -152,10 +152,19 @@ export class ListingForm extends HTMLElement {
 
   populateForm(listing: IListing) {
     this.editing = true;
-    // TODO: Populate listing.photos array
+    const photosFragment = document.createDocumentFragment();
+
+    listing.photos.forEach((photo: string) => {
+      const image = document.createElement('img');
+      image.setAttribute('src', photo);
+      photosFragment.appendChild(image)
+    })
+
     this.disconnectedCallback();
     this.render(listing);
     this.connectedCallback();
+
+    this.gallerySection.appendChild(photosFragment);
   }
 
   render(listing = this.newListing) {
