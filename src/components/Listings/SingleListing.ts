@@ -1,12 +1,13 @@
 import { IListing } from "./ListingsModel";
 import { ListingService } from '../../services/ListingService';
+import placeholderImage from '../../images/placeholder.png'
 
 const HTMLTemplate = (listing: IListing) => `
     <div class="expired" ${listing.expired ? '' : 'hidden'}>Expired</div>
 
     <picture>
       <!-- Add Image Sources here-->
-      <img src="${listing.photos[0]}" alt="${listing.address}, ${listing.postcode}" onerror="this.src='https://via.placeholder.com/150'" />
+      <img src="${listing.photos[0] || placeholderImage}" alt="${listing.address}, ${listing.postcode}" />
     </picture>
 
     <div>

@@ -13,6 +13,7 @@ const HTMLTemplate = (params: IAppState) => `
     </main>
 
     <zoopla-listing-form hidden></zoopla-listing-form>
+    <zoopla-listing-gallery hidden></zoopla-listing-gallery>
 `;
 
 export class AppComponent extends HTMLElement {
