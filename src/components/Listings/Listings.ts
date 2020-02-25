@@ -1,4 +1,3 @@
-import './Listings.scss';
 import { IListing } from './ListingsModel';
 
 const HTMLTemplate = (state: IListingsState) => `
@@ -8,7 +7,7 @@ const HTMLTemplate = (state: IListingsState) => `
     </section>
 `;
 
-class ListingsComponent extends HTMLElement {
+export class ListingsComponent extends HTMLElement {
   public state: IListingsState = { title: 'My Listings', listings: [] };
   public listingsElement!: HTMLElement;
 

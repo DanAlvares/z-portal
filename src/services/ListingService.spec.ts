@@ -7,12 +7,10 @@ describe('ListingService', () => {
     listingService = new ListingService();
   })
 
-  it('adds a listing', () => { });
+  test('adds a listing', () => { });
 
-  it('gets all listings', () => { });
+  test('gets all listings', () => { });
 
-  it('updates a listing', () => { });
-
-  it('expires a listing', () => { });
+  test('updates a listing', () => { });
 
 })

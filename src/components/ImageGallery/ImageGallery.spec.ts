@@ -1,7 +1,7 @@
 describe('ImageGallery', () => {
-  it('renders images', () => { })
+  test('renders images', () => { })
 
-  it('goes to next image', () => { })
+  test('goes to next image', () => { })
 
-  it('goes to next image', () => { })
+  test('goes to next image', () => { })
 })
