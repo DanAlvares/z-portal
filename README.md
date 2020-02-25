@@ -40,8 +40,7 @@ Well structured, semantic markup will get the app 80% of the way. I don't feel t
 
 ## TODO
 - [ ] Complete styling from `SingleListingComponent`
-- [ ] `ThumbnailGallerycomponent` (incl unit tests)
-- [ ] `ImageGalleryComponent`(incl unit tests)
+- [ ] Complete `ImageGalleryComponent`(incl unit tests)
 - [ ] `PhotoUploadComponent` (to Cloudinary)
 
 #### Would be nice

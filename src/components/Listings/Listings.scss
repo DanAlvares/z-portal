@@ -4,10 +4,11 @@ zoopla-listings {
   }
 
   .single-listing{
-    position: relative;
+    border-bottom: solid 1px #dedede;
+    display: flex;
     margin-bottom: 2rem;
     padding: 0 0 2rem;
-    border-bottom: solid 1px #dedede;
+    position: relative;
 
     h3 {
       margin: 0
@@ -39,17 +40,11 @@ zoopla-listings {
       min-height: 64px;
     }
 
-    .thumbnail-gallery {
-      float: left;
+    picture {
+      flex: 0 0 150px;
       margin-right: 1rem;
-      overflow: hidden;
-      position: relative;
-      width: 150px;
-      white-space: nowrap;
 
-      img{
-        height: auto;
-        max-width: 100%;
+      img {
         width: 100%;
       }
     }
@@ -61,11 +56,12 @@ zoopla-listings {
     }
 
     @media (max-width: 567px){
+      flex: auto;
+      flex-flow: wrap;
       padding-bottom: 4rem;
       
-      .thumbnail-gallery {
-        float: none;
-        width: 100%;
+      picture {
+        flex: 0 0 100%;
       }
       
       button {

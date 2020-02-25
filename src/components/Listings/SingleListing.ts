@@ -4,20 +4,23 @@ import { ListingService } from '../../services/ListingService';
 const HTMLTemplate = (listing: IListing) => `
     <div class="expired" ${listing.expired ? '' : 'hidden'}>Expired</div>
 
-    <section class="thumbnail-gallery">
-        <img src="${listing.photos[0]}" onerror="this.src='https://via.placeholder.com/150'" alt="" />
-    </section>
+    <picture>
+      <!-- Add Image Sources here-->
+      <img src="${listing.photos[0]}" alt="${listing.address}, ${listing.postcode}" onerror="this.src='https://via.placeholder.com/150'" />
+    </picture>
 
-    <h3>${listing.askingPrice}</h3>
-
-    <strong class="beds">${listing.beds} Bed</strong> |
-    <strong class="baths">${listing.baths} Bath</strong>
-
-    <address>${listing.address}, ${listing.postcode}</address>
-
-    <p class="description">${listing.description}</p>
-
-    <button class="btn btn-outline edit-listing" data-listing-id="${listing._id}">Edit Listing</button>
+    <div>
+      <h3>${listing.askingPrice}</h3>
+  
+      <strong class="beds">${listing.beds} Bed</strong> |
+      <strong class="baths">${listing.baths} Bath</strong>
+  
+      <address>${listing.address}, ${listing.postcode}</address>
+  
+      <p class="description">${listing.description}</p>
+      
+      <button class="btn btn-outline edit-listing" data-listing-id="${listing._id}">Edit Listing</button>
+    </div>
 `;
 
 class ListingItem extends HTMLElement {
