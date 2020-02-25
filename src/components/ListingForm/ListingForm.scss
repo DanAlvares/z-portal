@@ -85,6 +85,11 @@ form.submitted input:invalid {
   max-height: 80px;
   max-width: 80px;
   margin-right: .4rem;
+  transition: filter .15s linear;
+  
+  &:hover{
+    filter: grayscale(1)
+  }
 }
 
 @media (max-width: 413px) {

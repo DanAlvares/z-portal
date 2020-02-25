@@ -55,7 +55,7 @@ export class ListingForm extends HTMLElement {
     expired: false,
     postcode: '',
     photos: [],
-  }
+  };
 
   private editing: boolean = false;
   private listingService = new ListingService();
@@ -67,7 +67,7 @@ export class ListingForm extends HTMLElement {
 
   constructor() {
     super();
-    this.render();
+    this.innerHTML = HTMLTemplate(this.newListing);
   }
 
   static get observedAttributes() {
@@ -76,7 +76,8 @@ export class ListingForm extends HTMLElement {
 
   attributeChangedCallback(attr: string, oldValue: string, newValue: string) {
     if (newValue && attr === 'listing') {
-      this.populateForm(JSON.parse(newValue))
+      const listing = JSON.parse(newValue);
+      if (listing._id) { this.populateForm(listing) }
     }
   }
 
@@ -90,14 +91,16 @@ export class ListingForm extends HTMLElement {
     this.cancelBtn.addEventListener('click', this.hideForm.bind(this));
     this.saveBtn.addEventListener('click', this.triggerSubmitted.bind(this));
     this.listingForm.addEventListener('submit', this.saveListing.bind(this));
-    this.photoUpload.addEventListener('change', (event) => this.uploadPhotos(event));
+    this.photoUpload.addEventListener('change', event => this.uploadPhotos.bind(this, event)());
+    this.gallerySection.addEventListener('click', event => this.removeImage.bind(this, event)());
   }
 
   disconnectedCallback() {
     this.cancelBtn.removeEventListener('click', this.hideForm.bind(this));
     this.saveBtn.removeEventListener('click', this.triggerSubmitted.bind(this));
     this.listingForm.removeEventListener('submit', this.saveListing.bind(this));
-    this.photoUpload.removeEventListener('change', (event) => this.uploadPhotos(event));
+    this.gallerySection.removeEventListener('click', event => this.removeImage.bind(this, event)());
+    this.photoUpload.removeEventListener('change', event => this.uploadPhotos.bind(this, event)());
   }
 
   saveListing(event: Event) {
@@ -129,8 +132,10 @@ export class ListingForm extends HTMLElement {
           const imageDataUrl = (event.target as any).result;
 
           newImage.setAttribute('src', imageDataUrl);
+          this.newListing.photos
+            ? this.newListing.photos.push(imageDataUrl)
+            : this.newListing.photos[imageDataUrl];
 
-          this.newListing.photos.push(imageDataUrl)
           this.gallerySection.appendChild(newImage);
         };
 
@@ -141,9 +146,18 @@ export class ListingForm extends HTMLElement {
 
   hideForm() {
     this.setAttribute('hidden', 'hidden');
-    this.disconnectedCallback();
+    this.newListing = {
+      _id: new Date().getTime(),
+      address: '',
+      askingPrice: '',
+      baths: null,
+      beds: null,
+      description: '',
+      expired: false,
+      postcode: '',
+      photos: [],
+    }
     this.render(this.newListing);
-    this.connectedCallback();
   }
 
   triggerSubmitted() {
@@ -151,24 +165,37 @@ export class ListingForm extends HTMLElement {
   }
 
   populateForm(listing: IListing) {
-    this.editing = true;
     const photosFragment = document.createDocumentFragment();
 
-    listing.photos.forEach((photo: string) => {
+    this.editing = true;
+    this.newListing = { ...listing };
+
+    this.newListing.photos.forEach((photo: string) => {
       const image = document.createElement('img');
       image.setAttribute('src', photo);
       photosFragment.appendChild(image)
     })
 
-    this.disconnectedCallback();
     this.render(listing);
-    this.connectedCallback();
 
     this.gallerySection.appendChild(photosFragment);
   }
 
   render(listing = this.newListing) {
+    this.disconnectedCallback();
     this.innerHTML = HTMLTemplate(listing);
+    this.connectedCallback();
+  }
+
+
+  removeImage(event: Event) {
+    const parent = (event.target as HTMLElement).parentElement;
+    const imgIndex = Array.prototype.indexOf.call(parent?.children, event.target);
+
+    this.newListing.photos.splice(imgIndex, 1);
+    this.listingService.updateListing(this.newListing);
+
+    this.populateForm(this.newListing);
   }
 }
 
