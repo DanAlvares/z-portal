@@ -18,8 +18,9 @@ zoopla-listing-form {
     box-sizing: border-box;
     left: 50%;
     max-height: 85vh;
-    max-width: 95%;
-    overflow: auto;
+    max-width: 95%;   
+    overflow-y: auto;
+    overflow-x: hidden;
     padding: 1.4rem;
     position: fixed;
     top: 50%;
