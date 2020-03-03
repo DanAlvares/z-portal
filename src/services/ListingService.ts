@@ -27,7 +27,6 @@ export class ListingService {
     const appListings = appComponent.state.listings;
 
     const listingIndex = appListings.findIndex((listing: IListing) => listing._id === listing._id);
-    // TODO: Expire listing (as part of the form)
     appComponent.state.listings = [
       ...appListings.slice(0, listingIndex),
       listing,

@@ -7,7 +7,7 @@ const HTMLTemplate = (params: any) => `
 `;
 
 export class HeaderComponent extends HTMLElement {
-  public state = { title: 'Zoopla Portal' }
+  public state = { title: 'Z - Portal' }
 
   constructor() {
     super();
@@ -20,4 +20,4 @@ export class HeaderComponent extends HTMLElement {
 }
 
 
-window.customElements.define('zoopla-header', HeaderComponent);
+window.customElements.define('z-header', HeaderComponent);

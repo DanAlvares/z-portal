@@ -5,15 +5,15 @@ import { Utils } from '../../services/Utils';
 const HTMLTemplate = (params: IAppState) => `
     <main class="container">
         <section>
-            <zoopla-listings listings="${params.sanitized_listings}"></zoopla-listings>
+            <z-listings listings="${params.sanitized_listings}"></z-listings>
         </section>
         <aside>
             <button class="btn btn-secondary btn-block add-listing" type="button">+ <span>Add Listing</span></button>
         </aside>
     </main>
 
-    <zoopla-listing-form hidden></zoopla-listing-form>
-    <zoopla-listing-gallery hidden></zoopla-listing-gallery>
+    <z-listing-form hidden></z-listing-form>
+    <z-listing-gallery hidden></z-listing-gallery>
 `;
 
 export class AppComponent extends HTMLElement {
@@ -21,7 +21,7 @@ export class AppComponent extends HTMLElement {
   public state: IAppState = { listings: this.listingService.getListings() };
 
   private addListingBtn!: HTMLElement;
-  private zooplaForm!: HTMLElement;
+  private zForm!: HTMLElement;
 
   constructor() {
     super();
@@ -30,7 +30,7 @@ export class AppComponent extends HTMLElement {
 
   connectedCallback() {
     this.addListingBtn = <HTMLElement>document.querySelector('.btn.add-listing');
-    this.zooplaForm = <HTMLElement>document.querySelector('zoopla-listing-form');
+    this.zForm = <HTMLElement>document.querySelector('z-listing-form');
 
     this.addListingBtn.addEventListener('click', this.addListing.bind(this));
   }
@@ -40,7 +40,7 @@ export class AppComponent extends HTMLElement {
   }
 
   addListing() {
-    this.zooplaForm.toggleAttribute('hidden');
+    this.zForm.toggleAttribute('hidden');
   }
 
   render() {
@@ -50,7 +50,7 @@ export class AppComponent extends HTMLElement {
 
 }
 
-window.customElements.define('zoopla-portal', AppComponent);
+window.customElements.define('z-portal', AppComponent);
 
 interface IAppState {
   listings: IListing[];

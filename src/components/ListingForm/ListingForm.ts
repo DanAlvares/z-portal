@@ -207,4 +207,4 @@ export class ListingForm extends HTMLElement {
   }
 }
 
-window.customElements.define('zoopla-listing-form', ListingForm);
+window.customElements.define('z-listing-form', ListingForm);

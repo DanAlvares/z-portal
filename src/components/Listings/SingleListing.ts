@@ -29,7 +29,7 @@ class ListingItem extends HTMLElement {
 
   private listingService = new ListingService();
   private editBtn!: HTMLElement;
-  private zooplaForm!: HTMLElement;
+  private zForm!: HTMLElement;
 
   constructor() {
     super();
@@ -47,7 +47,7 @@ class ListingItem extends HTMLElement {
   }
 
   connectedCallback() {
-    this.zooplaForm = <HTMLElement>document.querySelector('zoopla-listing-form');
+    this.zForm = <HTMLElement>document.querySelector('z-listing-form');
     this.editBtn = <HTMLElement>this.querySelector('.edit-listing');
 
     this.editBtn.addEventListener('click', this.editListing.bind(this))
@@ -63,8 +63,8 @@ class ListingItem extends HTMLElement {
       .getListings()
       .find((listing: IListing) => Number(listingId) === listing._id);
 
-    this.zooplaForm.setAttribute('listing', JSON.stringify(selectedListing))
-    this.zooplaForm.removeAttribute('hidden')
+    this.zForm.setAttribute('listing', JSON.stringify(selectedListing))
+    this.zForm.removeAttribute('hidden')
   }
 
   render(state: IListing = this.state) {
@@ -72,4 +72,4 @@ class ListingItem extends HTMLElement {
   }
 }
 
-window.customElements.define('zoopla-listing', ListingItem, { extends: 'article' });
+window.customElements.define('z-listing', ListingItem, { extends: 'article' });

@@ -31,7 +31,7 @@ export class ListingsComponent extends HTMLElement {
     listingsElement.innerHTML = '';
 
     this.state.listings.forEach(item => {
-      const listingItem = document.createElement('article', { is: 'zoopla-listing' });
+      const listingItem = document.createElement('article', { is: 'z-listing' });
       listingItem.setAttribute('listing', JSON.stringify(item))
       listingItem.className = 'single-listing';
       listingFragment.appendChild(listingItem);
@@ -45,7 +45,7 @@ export class ListingsComponent extends HTMLElement {
   }
 }
 
-window.customElements.define('zoopla-listings', ListingsComponent);
+window.customElements.define('z-listings', ListingsComponent);
 
 interface IListingsState {
   title: string;

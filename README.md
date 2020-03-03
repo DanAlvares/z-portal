@@ -1,10 +1,10 @@
-# Zoopla Portal
+# Z - Portal
 
-A portal, used by agents, to add their listings.
+**Technical test - Take home project.** A portal that would be used by agents, to add, view, edit and expire their listings.
 
 ## Running the app
     $ git clone <REPO_URL>  
-    $ cd Dan.Alvares  
+    $ cd z-portal  
     $ npm i  
     $ npm start 
 
@@ -41,7 +41,6 @@ Well structured, semantic markup will get the app 80% of the way. I don't feel t
 ## TODO
 - [ ] Complete `ImageGalleryComponent`(incl unit tests)
 - [ ] `PhotoUploadComponent` (to Cloudinary)
-- [ ] Improve styling from `SingleListingComponent`
 - [ ] Improve unit test coverage
 
 #### Would be nice

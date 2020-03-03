@@ -29,4 +29,4 @@ export class ImageGalleryComponent extends HTMLElement {
 }
 
 
-window.customElements.define('zoopla-listing-gallery', ImageGalleryComponent);
+window.customElements.define('z-listing-gallery', ImageGalleryComponent);
