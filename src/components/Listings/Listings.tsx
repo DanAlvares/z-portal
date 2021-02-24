@@ -1,9 +1,12 @@
 import { IListing } from './ListingsModel';
+import JSX from '../../jsx';
 
-const HTMLTemplate = (state: IListingsState) => `
-    <h2>${state.title}</h2>
+const HTMLTemplate = (state: IListingsState) =>
+  <div>
+    <h2>{state.title}</h2>
     <section class="listings"></section>
-`;
+  </div>
+  ;
 
 export class ListingsComponent extends HTMLElement {
   public state: IListingsState = { title: 'My Listings', listings: [] };
@@ -27,7 +30,7 @@ export class ListingsComponent extends HTMLElement {
 
   renderListings() {
     const listingFragment = document.createDocumentFragment();
-    const listingsElement = <HTMLElement>document.querySelector('.listings');
+    const listingsElement = document.querySelector('.listings') as HTMLElement;
     listingsElement.innerHTML = '';
 
     this.state.listings.forEach(item => {

@@ -1,10 +1,12 @@
-const HTMLTemplate = (params: any) => `
-    <header>
-        <div class="container">
-            <h1><a href="/">${params.title}</a></h1>
-        </div>
-    </header>
-`;
+import JSX from '../../jsx'
+
+const HTMLTemplate = (params: any) =>
+  <header>
+    <div class="container">
+      <h1><a href="/">{params.title}</a></h1>
+    </div>
+  </header>
+  ;
 
 export class HeaderComponent extends HTMLElement {
   public state = { title: 'Z - Portal' }
@@ -18,6 +20,5 @@ export class HeaderComponent extends HTMLElement {
     this.innerHTML = HTMLTemplate(state);
   }
 }
-
 
 window.customElements.define('z-header', HeaderComponent);
