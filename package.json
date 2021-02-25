@@ -8,10 +8,11 @@
     "test": "jest --runInBand --env=jest-environment-happy-dom"
   },
   "author": "Dan Alvares",
-  "dependencies": {},
+  "dependencies": {
+    "babel-core": "^6.26.3"
+  },
   "devDependencies": {
     "@types/jest": "^25.2.3",
-    "babel-core": "^6.26.3",
     "husky": "^4.3.8",
     "jest": "^25.5.4",
     "jest-environment-happy-dom": "0.0.41",

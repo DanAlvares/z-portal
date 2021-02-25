@@ -1,6 +1,6 @@
-import './components/App/App.tsx';
-import './components/Header/Header.tsx';
-import './components/Listings/Listings.tsx';
-import './components/Listings/SingleListing.tsx';
+import './components/App/App';
+import './components/Header/Header';
+import './components/Listings/Listings';
+import './components/Listings/SingleListing';
 import './components/ListingForm/ListingForm';
 import './components/ImageGallery/ImageGallery';

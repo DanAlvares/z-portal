@@ -1,53 +1,56 @@
 
 import { ListingService } from "../../services/ListingService";
 import { IListing } from "../Listings/ListingsModel";
+import { JSX } from '../../jsx'
 
-const HTMLTemplate = (listing: IListing) => `
+const HTMLTemplate = (listing: IListing) =>
+  <div>
     <div class="overlay"></div>
 
     <div class="form-modal">
-        <header><h3>Listing Details</h3></header>
-        <section>
+      <header><h3>Listing Details</h3></header>
+      <section>
         <form class="listing-form">
-            <div class="form-field">
-                <label for="AskingPrice">Asking price</label>
-                <input value="${listing.askingPrice}" type="text" placeholder="What is the asking price? eg. £400 000" name="AskingPrice" id="AskingPrice" required>
-            </div>
-            <div class="form-field two-column">
-                <label for="Beds">Number of bedrooms & bathrooms</label>
-                <input value="${listing.beds}" type="number" placeholder="How many bedrooms?" name="Beds" id="Beds" required>
-                <input value="${listing.baths}" type="number" placeholder="How many bathrooms?" name="Baths" id="Baths" required>
-            </div>
-            <div class="form-field two-column address">
-                <label for="Address">Address</label>
-                <input value="${listing.address}" type="text" placeholder="What is the first line?" name="Address" id="Address" required>
-                <input value="${listing.postcode}" type="text" placeholder="Postcode" name="Postcode" id="Postcode" required>
-            </div>
-            <div class="form-field">
-                <label for="Description">Description</label>
-                <textarea placeholder="Give some details about the property" name="Description" id="Description" required>${listing.description}</textarea>
-            </div>
-            
-            <div class="form-field">
-                <label for="Photos">Upload Photos</label>
-                <input type="file" name="Photos" id="Photos" multiple accept="image/png,image/gif,image/jpeg">
-                <section class="uploaded-photos"></section>
-            </div>
+          <div class="form-field">
+            <label for="AskingPrice">Asking price</label>
+            <input value={listing.askingPrice} type="text" placeholder="What is the asking price? eg. £400 000" name="AskingPrice" id="AskingPrice" required />
+          </div>
+          <div class="form-field two-column">
+            <label for="Beds">Number of bedrooms & bathrooms</label>
+            <input value={listing.beds} type="number" placeholder="How many bedrooms?" name="Beds" id="Beds" required />
+            <input value={listing.baths} type="number" placeholder="How many bathrooms?" name="Baths" id="Baths" required />
+          </div>
+          <div class="form-field two-column address">
+            <label for="Address">Address</label>
+            <input value={listing.address} type="text" placeholder="What is the first line?" name="Address" id="Address" required />
+            <input value={listing.postcode} type="text" placeholder="Postcode" name="Postcode" id="Postcode" required />
+          </div>
+          <div class="form-field">
+            <label for="Description">Description</label>
+            <textarea placeholder="Give some details about the property" name="Description" id="Description" required>${listing.description}</textarea>
+          </div>
 
-            <div class="form-field checkbox">
-              <input ${listing.expired ? 'checked' : ''} type="checkbox"  name="Expired" id="Expired">
-              <label for="Expired">Expired?</label>
-            </div>
+          <div class="form-field">
+            <label for="Photos">Upload Photos</label>
+            <input type="file" name="Photos" id="Photos" multiple accept="image/png,image/gif,image/jpeg" />
+            <section class="uploaded-photos"></section>
+          </div>
 
-            <section class="btn-group">
-                <button class="btn cancel-edit" type="button">Cancel</button>
-                <button class="btn btn-secondary save-listing" type="submit">Save Listing</button>
-            </section>
+          <div class="form-field checkbox">
+            <input {...listing.expired ? 'checked' : ''} type="checkbox" name="Expired" id="Expired" />
+            <label for="Expired">Expired?</label>
+          </div>
+
+          <section class="btn-group">
+            <button class="btn cancel-edit" type="button">Cancel</button>
+            <button class="btn btn-secondary save-listing" type="submit">Save Listing</button>
+          </section>
         </form>
-        </section>
+      </section>
 
     </div>
-`;
+  </div>
+  ;
 
 export class ListingForm extends HTMLElement {
   public newListing: IListing | any = {
@@ -87,11 +90,11 @@ export class ListingForm extends HTMLElement {
   }
 
   connectedCallback() {
-    this.cancelBtn = <HTMLElement>this.querySelector('.btn.cancel-edit');
-    this.saveBtn = <HTMLElement>this.querySelector('.btn.save-listing');
-    this.photoUpload = <HTMLElement>this.querySelector('#Photos');
-    this.listingForm = <HTMLFormElement>this.querySelector('.listing-form');
-    this.gallerySection = <HTMLElement>this.querySelector('.uploaded-photos');
+    this.cancelBtn = this.querySelector('.btn.cancel-edit') as HTMLElement;
+    this.saveBtn = this.querySelector('.btn.save-listing') as HTMLElement;
+    this.photoUpload = this.querySelector('#Photos') as HTMLElement;
+    this.listingForm = this.querySelector('.listing-form') as HTMLFormElement;
+    this.gallerySection = this.querySelector('.uploaded-photos') as HTMLElement;
 
     this.cancelBtn.addEventListener('click', this.hideForm.bind(this));
     this.saveBtn.addEventListener('click', this.triggerSubmitted.bind(this));

@@ -1,5 +1,5 @@
 import { listings } from './data';
-import { AppComponent } from '../components/App/App.tsx';
+import { AppComponent } from '../components/App/App';
 import { IListing } from '../components/Listings/ListingsModel';
 
 export class ListingService {
