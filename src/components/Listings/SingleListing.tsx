@@ -1,31 +1,33 @@
 import { IListing } from "./ListingsModel";
 import { ListingService } from '../../services/ListingService';
-import placeholderImage from '../../images/placeholder.png'
+import placeholderImage from '../../images/placeholder.png';
+import { JSX } from '../../jsx'
 
-const HTMLTemplate = (listing: IListing) => `
-    ${listing.expired ? '<div class="expired">Expired</div>' : ''}
+const HTMLTemplate = (listing: IListing) =>
+  <div style="display: flex">
+    {listing.expired ? <div class="expired">Expired</div> : ''}
 
     <picture>
-      <!-- Add Image Sources here-->
-      <img src="${listing.photos[0] || placeholderImage}" alt="${listing.address}, ${listing.postcode}" />
+      <img src={listing.photos[0] || placeholderImage} alt={listing.address + ', ' + listing.postcode} />
     </picture>
 
     <div>
-      <h3>${listing.askingPrice}</h3>
-  
-      <strong class="beds">${listing.beds} Bed</strong> |
-      <strong class="baths">${listing.baths} Bath</strong>
-  
-      <address>${listing.address}, ${listing.postcode}</address>
-  
-      <p class="description">${listing.description}</p>
-      
-      <button class="btn btn-outline edit-listing" data-listing-id="${listing._id}">Edit Listing</button>
+      <h3>{listing.askingPrice}</h3>
+
+      <strong class="beds">{listing.beds} Bed</strong> |
+      <strong class="baths">{listing.baths} Bath</strong>
+
+      <address>{listing.address}, {listing.postcode}</address>
+
+      <p class="description">{listing.description}</p>
+
+      <button class="btn btn-outline edit-listing" data-listing-id={listing._id}>Edit Listing</button>
     </div>
-`;
+  </div>
+  ;
 
 class ListingItem extends HTMLElement {
-  public state: IListing = <IListing>{ address: {} };
+  public state: IListing = { address: {} } as IListing;
 
   private listingService = new ListingService();
   private editBtn!: HTMLElement;
@@ -47,9 +49,9 @@ class ListingItem extends HTMLElement {
   }
 
   connectedCallback() {
-    this.zForm = <HTMLElement>document.querySelector('z-listing-form');
-    this.editBtn = <HTMLElement>this.querySelector('.edit-listing');
-
+    this.zForm = document.querySelector('z-listing-form') as HTMLElement;
+    this.editBtn = this.querySelector('.edit-listing') as HTMLElement;
+    console.log(this)
     this.editBtn.addEventListener('click', this.editListing.bind(this))
   }
 
