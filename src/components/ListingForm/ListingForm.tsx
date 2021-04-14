@@ -16,7 +16,7 @@ const HTMLTemplate = (listing: IListing) =>
             <input value={listing.askingPrice} type="text" placeholder="What is the asking price? eg. £400 000" name="AskingPrice" id="AskingPrice" required />
           </div>
           <div class="form-field two-column">
-            <label for="Beds">Number of bedrooms & bathrooms</label>
+            <label for="Beds">Number of bedrooms &amp; bathrooms</label>
             <input value={listing.beds} type="number" placeholder="How many bedrooms?" name="Beds" id="Beds" required />
             <input value={listing.baths} type="number" placeholder="How many bathrooms?" name="Baths" id="Baths" required />
           </div>

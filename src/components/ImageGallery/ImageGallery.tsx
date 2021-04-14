@@ -1,5 +1,6 @@
+import JSX from '../../jsx';
 
-const HTMLTemplate = (state: any) => ``;
+const HTMLTemplate = (state: any) => <></>;
 
 export class ImageGalleryComponent extends HTMLElement {
   public state = {}
